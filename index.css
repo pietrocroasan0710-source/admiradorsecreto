@@ -81,6 +81,19 @@
     margin-bottom:1.4rem;
   }
 
+  .hero-eyebrow, .hero h1, .hero p, .hero-cta{
+    opacity:0;
+    animation:fade-rise 0.9s ease forwards;
+  }
+  .hero-eyebrow{animation-delay:0.1s;}
+  .hero h1{animation-delay:0.3s;}
+  .hero p{animation-delay:0.55s;}
+  .hero-cta{animation-delay:0.8s;}
+  @keyframes fade-rise{
+    from{opacity:0; transform:translateY(16px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
   .hero h1{
     font-family:var(--serif);
     font-weight:500;
@@ -351,6 +364,169 @@
     height:1px;
     background:var(--red);
     margin:0 auto 1.2rem;
+  }
+
+  /* ---------- Fundo de corações flutuantes (site inteiro) ---------- */
+  .ambient-hearts{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:1;
+    overflow:hidden;
+  }
+  .ambient-heart{
+    position:absolute;
+    bottom:-10vh;
+    color:var(--red);
+    opacity:0;
+    animation-name:drift-up;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+  }
+  @keyframes drift-up{
+    0%{transform:translateY(0) rotate(0deg); opacity:0;}
+    8%{opacity:0.35;}
+    92%{opacity:0.2;}
+    100%{transform:translateY(-115vh) rotate(25deg); opacity:0;}
+  }
+
+  /* garante que o conteúdo real fique acima do fundo animado */
+  header, .hero, .roulette, .poems, .places, .closing, footer{
+    position:relative;
+    z-index:2;
+  }
+
+  /* ---------- Revelação genérica ao rolar ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(20px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  .section-kicker{
+    font-size:0.75rem;
+    letter-spacing:0.16em;
+    color:var(--red);
+    text-transform:uppercase;
+    margin-bottom:1rem;
+  }
+
+  /* ---------- Poemas ---------- */
+  .poems{
+    padding:7rem 6vw 5rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    background:
+      radial-gradient(ellipse 55% 45% at 15% 10%, rgba(51,22,61,0.4), transparent 60%),
+      var(--near-black);
+  }
+  .poems h2, .places h2{
+    font-family:var(--serif);
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(2rem, 4.5vw, 3rem);
+  }
+  .poems > p.sub, .places > p.sub{
+    margin-top:0.7rem;
+    margin-bottom:0;
+    color:var(--white-dim);
+    max-width:42ch;
+    font-size:0.95rem;
+    line-height:1.6;
+  }
+
+  .poem-grid{
+    margin-top:3.6rem;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:1.6rem;
+    width:100%;
+    max-width:1000px;
+  }
+
+  .poem-card{
+    background:linear-gradient(160deg, rgba(51,22,61,0.5), rgba(22,26,58,0.5));
+    border:1px solid rgba(244,239,233,0.1);
+    border-radius:18px;
+    padding:2.2rem 1.8rem;
+    text-align:left;
+    transition:transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+  .poem-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(195,31,63,0.5);
+    box-shadow:0 18px 40px rgba(0,0,0,0.4);
+  }
+  .poem-card-title{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:1.2rem;
+    color:var(--red);
+    margin-bottom:1rem;
+  }
+  .poem-card-body{
+    font-family:var(--serif);
+    font-size:1.05rem;
+    line-height:1.85;
+    color:var(--white);
+    white-space:pre-line;
+  }
+
+  /* ---------- Lugares / coisas ---------- */
+  .places{
+    padding:7rem 6vw 8rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    background:
+      radial-gradient(ellipse 55% 45% at 85% 10%, rgba(122,17,48,0.25), transparent 60%),
+      linear-gradient(180deg, var(--near-black) 0%, var(--blue-dark) 130%);
+  }
+
+  .place-grid{
+    margin-top:3.6rem;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:1.4rem;
+    width:100%;
+    max-width:1000px;
+  }
+
+  .place-card{
+    background:rgba(244,239,233,0.04);
+    border:1px solid rgba(244,239,233,0.1);
+    border-radius:16px;
+    padding:1.8rem 1.4rem;
+    transition:transform 0.30s ease, background 0.30s ease, border-color 0.30s ease;
+  }
+  .place-card:hover{
+    transform:translateY(-6px) scale(1.02);
+    background:rgba(195,31,63,0.1);
+    border-color:rgba(195,31,63,0.4);
+  }
+  .place-card-icon{
+    font-size:1.8rem;
+    margin-bottom:0.9rem;
+    display:block;
+  }
+  .place-card-title{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:1.1rem;
+    color:var(--white);
+    margin-bottom:0.5rem;
+  }
+  .place-card-text{
+    font-size:0.85rem;
+    line-height:1.55;
+    color:var(--white-dim);
   }
 
   footer{

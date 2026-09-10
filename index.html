@@ -19,6 +19,8 @@
   <nav>
     <a href="#inicio">início</a>
     <a href="#roleta">a roleta</a>
+    <a href="#poemas">poemas</a>
+    <a href="#lugares">o que me lembra você</a>
   </nav>
 </header>
 
@@ -32,8 +34,8 @@
 </section>
 
 <section class="roulette" id="roleta">
-  <h2>a roleta da sorte</h2>
-  <p class="sub">Gire e deixe o acaso escolher uma foto sua — e o que eu penso dela.</p>
+  <h2 class="reveal">a roleta da sorte</h2>
+  <p class="sub reveal">Gire e deixe o acaso escolher uma foto sua — e o que eu penso dela.</p>
 
   <div class="wheel-stage">
     <div class="wheel-pointer"></div>
@@ -53,8 +55,24 @@
   </div>
 </section>
 
+<section class="poems" id="poemas">
+  <div class="section-kicker in-view">versos que nunca te contei</div>
+  <h2 class="reveal">poemas</h2>
+  <p class="sub reveal">Coisas que escrevi pensando em você, e nunca tive coragem de mandar.</p>
+
+  <div class="poem-grid" id="poem-grid"></div>
+</section>
+
+<section class="places" id="lugares">
+  <div class="section-kicker reveal">pequenos gatilhos do dia a dia</div>
+  <h2 class="reveal">coisas que me lembram você</h2>
+  <p class="sub reveal">Um monte de coisa boba do meu dia vira você, sem eu nem perceber.</p>
+
+  <div class="place-grid" id="place-grid"></div>
+</section>
+
 <section class="closing" id="carta">
-  <div class="closing-inner" id="closing-inner">
+  <div class="closing-inner reveal" id="closing-inner">
     <p class="closing-kicker">antes de você ir</p>
     <p class="closing-text">Não sei se um dia vou ter coragem de dizer isso olhando nos seus olhos, então deixei escondido aqui, num site bobo, só para você achar. Cada foto que caiu na roleta é só uma fração do que eu sinto quando penso em você, o resto eu ainda estou aprendendo a colocar em palavras.</p>
     <p class="closing-sign">seu admirador secreto - mim rsrs</p>
@@ -198,17 +216,128 @@
     }, 4300);
   });
 
-  // Faz a carta final surgir suavemente quando entra na tela
-  const closingInner = document.getElementById('closing-inner');
-  const closingObserver = new IntersectionObserver((entries) => {
+  /* ============================================================
+     POEMAS
+     ------------------------------------------------------------
+     Edite ou adicione quantos quiser. "title" é opcional
+     (pode deixar "").
+     ============================================================ */
+  const POEMS = [
+    {
+      title: "Seus cachos",
+      body: "Seus cachos parecem o mar,\ncada curva uma onda diferente,\ne eu poderia passar horas olhando\nsem saber exatamente o que dizer.\n\nTalvez porque eles tenham esse mesmo efeito do mar:\nquanto mais eu olho,\nmais bonito parece.\n\nE, de algum jeito,\naté quando estão bagunçados,\ncontinuam sendo uma das coisas\nmais lindas em você.",
+    },
+    {
+      title: "Seus olhos",
+      body: "Eu queria encontrar uma palavra\nque fosse bonita o suficiente para seus olhos.\n\nMas toda vez que tento,\nparece pouco.\n\nEntão prefiro simplesmente olhar.\n\nPorque existem coisas\nque não precisam ser explicadas,\nsó admiradas.\n\nE seus olhos são uma delas.",
+    },
+    {
+      title: "Seu sorriso",
+      body: "Seu sorriso tem alguma coisa diferente.\n\nEle chega de mansinho\ne, quando eu percebo,\njá estou sorrindo também.\n\nÉ quase injusto\nvocê conseguir fazer isso tão facilmente.\n\nMas se depender de mim,\npode continuar.\n\nEu gosto de ter motivos\npara sorrir por sua causa.",
+    },
+    {
+      title: "Quando você vai.",
+      body:"Quando você vai,\no dia parece perder um pouquinho da graça.\n\nAs conversas acabam,\no silêncio aparece\ne eu começo a sentir sua falta.\n\nÉ estranho como algumas horas longe\npodem parecer muito mais longas.\n\nTalvez seja porque eu já me acostumei\ncom a felicidade que sinto quando você está por perto.",
+    },
+    {
+      title: "Na minha tela",
+      body:"Agora você está na tela do meu celular,\ne eu acho isso bonito.\n\nPorque toda vez que desbloqueio o celular,\nlá está você.\n\nE é engraçado pensar\nque uma simples foto\nconsegue me fazer sorrir tantas vezes.\n\nEntre tantas coisas que poderiam aparecer,\neu gosto que seja você.",
+    },
+    {
+      title: "Você",
+      body:"Não é só seu sorriso.\nNão são só seus olhos.\nNão são só seus cachos.\n\nÉ tudo.\n\nSeu jeito de falar,\nsuas pequenas manias,\nsuas expressões,\nsuas risadas\ne até aquelas coisas que você provavelmente nem percebe.\n\nAcho que é isso que torna você tão bonita:\nnão existe apenas um detalhe para admirar.\n\nÉ você por completo.",
+    },
+    {
+      title: "Pouquinho",
+      body:"Você não precisa fazer muito\npara melhorar meu dia.\n\nÀs vezes basta uma mensagem,\numa conversa boba,\numa risada inesperada.\n\nE pronto.\n\nLá estou eu, sorrindo igual bobo\npor causa de você.\n\nAcho bonito quando alguém consegue fazer bem\nsem sequer perceber que está fazendo.",
+    },{
+      title: "Se eu pudesse",
+      body:"Se eu pudesse guardar momentos,\nguardaria aqueles em que você sorri.\n\nSe pudesse guardar sons,\nguardaria sua risada.\n\nSe pudesse guardar paisagens,\nguardaria seus olhos.\n\nE se pudesse escolher uma coisa\npara ter sempre por perto,\n\nacho que escolheria você.",
+    },
+    {
+      title: "Pequenos detalhes",
+      body:"Talvez você não perceba,\nmas eu reparo nos pequenos detalhes.\n\nNo jeito que você sorri,\nna maneira como seus cachos caem,\nnas suas expressões,\nnas coisas que você fala sem pensar.\n\nSão detalhes pequenos,\nmas juntos fazem algo enorme:\n\nfazem você ser exatamente você.\n\nE eu gosto muito disso.",
+    },
+    {
+      title: "Para você",
+      body:"Esse poema não precisa ser perfeito.\n\nNem precisa ter as melhores palavras.\n\nPorque, no fim,\neu só queria conseguir escrever\no quanto você é especial para mim.\n\nMas acho que descobri uma coisa:\nalgumas pessoas são bonitas demais\npara caber completamente em palavras.\n\nE você é uma delas.",
+    },
+  ];
+
+  /* ============================================================
+     COISAS E LUGARES QUE ME LEMBRAM VOCÊ
+     ------------------------------------------------------------
+     "icon" pode ser qualquer emoji. Edite title/text à vontade.
+     ============================================================ */
+  const PLACES = [
+    { icon: "☕", title: "Café", text: "o café pode não ser tão bonito quanto você, mas como o café ele sempre me deperta como você faz." },
+    { icon: "🌧️", title: "dia de chuva", text: "não porque um dia de chuva me faça dormir muito, mas sim por que a chuva me relaxa me acalma e me traz uma brisa que você tras" },
+    { icon: "🎵", title: "aquela música", text: "Quando toca uma música do the weekend ou alguma que me lembre você e uma sensação de confortante te ter na cabeça" },
+    { icon: "🌙", title: "céu de noite", text: "olho pra lua e penso se você também tá olhando, olhando algo tão brilhoso tão belo me lembra você por que nos meus dias mais sombrios você ilumina els como a lua." },
+    { icon: "📍", title: "aquele lugar", text: "Sempre que vou em lugares que tem flores, lembro de você porque você e delicada bela e encatadora como uma rosa." },
+    { icon: "🍬", title: "seu doce favorito", text: "vejo na prateleira do mercado e sorrio sozinho feito bobo, pois lembr que você gosta de mim o quanto ama chocolate branco." },
+  ];
+
+  function renderPoems() {
+    const grid = document.getElementById('poem-grid');
+    POEMS.forEach((poem, i) => {
+      const card = document.createElement('div');
+      card.className = 'poem-card reveal';
+      card.style.transitionDelay = `${i * 0.12}s`;
+      card.innerHTML = `
+        ${poem.title ? `<div class="poem-card-title">${poem.title}</div>` : ''}
+        <div class="poem-card-body">${poem.body}</div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  function renderPlaces() {
+    const grid = document.getElementById('place-grid');
+    PLACES.forEach((place, i) => {
+      const card = document.createElement('div');
+      card.className = 'place-card reveal';
+      card.style.transitionDelay = `${i * 0.08}s`;
+      card.innerHTML = `
+        <span class="place-card-icon">${place.icon}</span>
+        <div class="place-card-title">${place.title}</div>
+        <div class="place-card-text">${place.text}</div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  renderPoems();
+  renderPlaces();
+
+  // Revelação genérica: qualquer elemento com classe "reveal" some
+  // e aparece suavemente quando entra na tela.
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        closingInner.classList.add('in-view');
-        closingObserver.disconnect();
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.4 });
-  closingObserver.observe(closingInner);
+  }, { threshold: 0.25 });
+  document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+  // Fundo com coraçõezinhos flutuando pelo site inteiro
+  const heartsLayer = document.createElement('div');
+  heartsLayer.className = 'ambient-hearts';
+  document.body.prepend(heartsLayer);
+
+  const HEART_COUNT = 16;
+  for (let i = 0; i < HEART_COUNT; i++) {
+    const heart = document.createElement('span');
+    heart.className = 'ambient-heart';
+    heart.textContent = '❤';
+    heart.style.left = `${Math.random() * 100}vw`;
+    heart.style.fontSize = `${10 + Math.random() * 16}px`;
+    heart.style.animationDuration = `${14 + Math.random() * 12}s`;
+    heart.style.animationDelay = `${Math.random() * 16}s`;
+    heartsLayer.appendChild(heart);
+  }
 </script>
 
 </body>
