@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Secret Admirer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="index.css">
+
+
+  
+</head>
+<body>
+
+<header>
+  <div class="logo">your secret admirer</div>
+  <nav>
+    <a href="#inicio">início</a>
+    <a href="#roleta">a roleta</a>
+  </nav>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="hero-eyebrow">um segredo guardado a sete chaves</div>
+  <h1>Alguém pensa em você <em>mais do que você imagina.</em></h1>
+  <p>Esse cantinho existe por um único motivo: guardar, em segredo, tudo que eu sinto por você. Quando estiver pronta, gire a roleta.</p>
+  <a class="hero-cta" href="#roleta">Ir até a roleta ↓</a>
+  <div class="envelope">✉️</div>
+  <div class="scroll-hint">role para descobrir</div>
+</section>
+
+<section class="roulette" id="roleta">
+  <h2>a roleta da sorte</h2>
+  <p class="sub">Gire e deixe o acaso escolher uma foto sua — e o que eu penso dela.</p>
+
+  <div class="wheel-stage">
+    <div class="wheel-pointer"></div>
+    <div class="wheel" id="wheel">
+      <div class="wheel-hub">💌</div>
+    </div>
+  </div>
+
+  <button id="spin-btn" type="button">Girar a roleta</button>
+
+  <div class="result" id="result">
+    <div class="result-photo" id="result-photo">
+      <span class="placeholder-mark">📷</span>
+    </div>
+    <p class="result-caption" id="result-caption"></p>
+    <p class="result-index" id="result-index"></p>
+  </div>
+</section>
+
+<section class="closing" id="carta">
+  <div class="closing-inner" id="closing-inner">
+    <p class="closing-kicker">antes de você ir</p>
+    <p class="closing-text">Não sei se um dia vou ter coragem de dizer isso olhando nos seus olhos, então deixei escondido aqui, num site bobo, só para você achar. Cada foto que caiu na roleta é só uma fração do que eu sinto quando penso em você, o resto eu ainda estou aprendendo a colocar em palavras.</p>
+    <p class="closing-sign">seu admirador secreto - mim rsrs</p>
+  </div>
+</section>
+<footer>feito em segredo, para uma pessoa que não sabe (ainda) — Your Secret Admirer por <p><b>Pietro Santana 2026 ©</b></p></footer>
+
+
+<script>
+  
+
+  /* ============================================================
+     COMO ADICIONAR FOTOS DE VERDADE
+     ------------------------------------------------------------
+     1. Crie uma pasta "fotos" ao lado deste arquivo e coloque
+        suas imagens lá (ex: fotos/foto1.jpg).
+     2. Vá até o array PHOTOS no <script> no final do arquivo.
+     3. Em cada item, troque "img: null" por
+        "img: 'fotos/foto1.jpg'" e escreva seu comentário em
+        "caption".
+     Enquanto "img" for null, um cartão-placeholder é exibido
+     no lugar da foto.
+     ============================================================ */
+  const PHOTOS = [
+    { img: "fotos/1", caption: "Nessa foto você tem um olhar que me deixa tonto tonto rsrs" },
+    { img: "fotos/2", caption: "Você era uma criança tãooo fofaaa" },
+    { img: "fotos/3", caption: "Nessa foto você está uma deusa, a minha deusa rsrs" },
+    { img: "fotos/4", caption: "Eu simplismente amo essa, essa carinha que vc fez alem de encantadora e tãoooo fofinhaaa, imagino você brava assim skskskskk" },
+    { img: "fotos/5", caption: "Eu gosto dessa por que você ta tão feliz e com um sorriso tão belo, e difícil de resistir" },
+    { img: "fotos/6", caption: "EU SIMPLISMENTE AMO QUANDO VOCÊ FAZ BIQUINHO E TIPO TÃOOOOO FOFOOOOOO." },
+    { img: "fotos/7", caption: "Essa você ta perfeita da pra ver bem seu rosto, seus olhos, e tão encantador." },
+    { img: "fotos/8", caption: "Eu adoro essa porque alem de encantadora e so me lembra o quão lindo são seus cachos, essa camisa da kuromi e muito fofaa." },
+    { img: "fotos/9", caption: "Nessa foto você provavelmente acabou de sair do banho, acabou de se arrumar, e so consigo pensar, como algo consegue ser tão bonito." },
+    { img: "fotos/10", caption: "Essa você tá simplimente uau... sksksksk sem palavras pra vc rsrs" },
+    { img: "fotos/11", caption: "Eu amo essa seu cabelo ta lindo, você de oculos, olhando pra câmera de um jeito que nossa, eu fico bobo com essa foto rsrs " },
+    { img: "fotos/12", caption: "Essa eu acho que ta tãoo bonitinhaaaaa, você era uma crinça muito fofa mdssss" },
+    {img: "fotos/13", caption: "Essa você ta gótica tipo ui ui, me derreto rsrs" },
+    { img: "fotos/14", caption: "Essa você ta tãoooo lindinhaaa, não duvido nada que vc comeu areia esse dia sksksksksksk" },
+    { img: "fotos/15", caption: "Seu cabelo ta simplismente perfeito nessa foto tipo uau" },
+    { img: "fotos/16", caption: "Esssaaa com crtz e minha favorita tipo ohh mdsss que bonitinhaaaa ai eu amo essa foto mdsss" },
+    { img: "fotos/17", caption: "My baby apenas, ohh mdsss muita forura essa baixinha ai (que eu amo muito inclusive)" },
+    { img: "fotos/18", caption: "Essa eu rio tanto quando vejo skskskksksksksksksksksk" },
+    { img: "fotos/19", caption: "Oh mdssss e tãoooooo bonitinhaaaa,tipo que fofura veiii" },
+    { img: "fotos/20", caption: "SKSKSKSKSKKSKSKSKS ESSSA SEMPRE ME FAZ RIR" },
+    {img: "fotos/21", caption: "Simpismente uau, sem palavras pra essa eu fico de boca aberta, tipo ta calor ne rsrs..."},
+    {img: "fotos/22", caption: "UMA GATINHA, MINHA GATINHA"},
+    {img: "fotos/23", caption: "VEI TIPO OLHA ISSO TIPO, nossa eu fico tontinho com essa belezura rsrs."},
+    {img: "fotos/24", caption: "Essa vc ta taooooo fofaaaa de olherinhaaa"},
+    {img: "fotos/25", caption: "simplismente uau, sem maquiagem o basico e vc continua sendo uma deusa mdsss"},
+    {img: "fotos/26", caption: "Essa eu amo tipo olha esse sorriso ele é hirresistivel mdsss, tipo nao tem como nao se derreter com um sorriso desse."},
+    {img: "fotos/27", caption: "Você tem um olhar que nossa, simplismente acaba cmg rsrs"},
+    {img: "fotos/28", caption: "sem palavras sério algo tao lindo assim não tenho palavras, que cheguem aos pés da sua beleza rsrs"},
+    {img: "fotos/29", caption: "Meu bem você fazendo bico e a coisa mais fofa do mundo, nossa eu amoooo isso skskskks"},
+    {img: "fotos/30", caption: "Se ta tãoo bonitinhaaa nesssaaaa, meu bebê vc."},
+    {img: "fotos/31", caption: "Cachos lindos, uma das coisas que mais admiro em você, eles me lembram um mar calmo, bom mas tambem me lembram o quão apaixonado sou neles rsrs"},
+    {img: "fotos/32", caption: "Você e sua irmã são tãoooo fofinhasssss mdss e muita fofura numa foto só skskks"},
+    {img: "fotos/33", caption: "Seus cachos estão tao lindos nessa foto que chegam a me hipnotizar."},
+    {img: "fotos/34", caption: "Essa eu simplismente adoro, tipo que mulher, NOSSA VC E MUITO GATA CARALHO."},
+    {img: "fotos/35", caption: "Aqui deu pa mim tipo que trem lindo vei, tipo casa cmg rsrs"},
+    {img: "fotos/36", caption: "Eu amo meu papel de parede ne tipo essa foto, e , e, fiu fiu ou nada haver..."},
+    {img: "fotos/37", caption: "KSKSKSKKSKSKKSKSKSKSKSKSKSKSKKSKSKSKSKS APENAS ISSO "},
+    {img: "fotos/38", caption: "Ela toda sedutora aqui, me seduziu ta, e muito rsrs"},
+    {img: "fotos/39", caption: "Você ta taooo fofaaa nessa tipo que cute cute, da vonatade de aprtar mdss"},
+    {img: "fotos/40", caption: "EU AMOOOO ESSAAAA, VOCÊ FAZENDO BICO ME PEGA TANTO"},
+
+  ];
+
+  const wheel = document.getElementById('wheel');
+  const spinBtn = document.getElementById('spin-btn');
+  const resultBox = document.getElementById('result');
+  const resultPhoto = document.getElementById('result-photo');
+  const resultCaption = document.getElementById('result-caption');
+  const resultIndex = document.getElementById('result-index');
+
+  const segColors = ['#c31f3f', '#33163d', '#161a3a', '#7a1130'];
+  const n = PHOTOS.length;
+  const segAngle = 360 / n;
+
+  // Build the wheel background as pie segments
+  let gradientStops = [];
+  for (let i = 0; i < n; i++) {
+    const color = segColors[i % segColors.length];
+    gradientStops.push(`${color} ${i * segAngle}deg ${(i + 1) * segAngle}deg`);
+  }
+  wheel.style.background = `conic-gradient(${gradientStops.join(',')})`;
+
+  // Place labels around the wheel
+  for (let i = 0; i < n; i++) {
+    const label = document.createElement('div');
+    label.className = 'wheel-label';
+    label.textContent = `foto ${i + 1}`;
+    const angle = i * segAngle + segAngle / 2;
+    label.style.transform = `translate(-2%, -50%) rotate(${angle}deg)`;
+    wheel.appendChild(label);
+  }
+
+  let currentRotation = 0;
+  let spinning = false;
+
+  spinBtn.addEventListener('click', () => {
+    if (spinning) return;
+    spinning = true;
+    spinBtn.disabled = true;
+    resultBox.classList.remove('show');
+
+    const targetIndex = Math.floor(Math.random() * n);
+    const fullSpins = 5 * 360;
+    // land so the middle of targetIndex segment sits under the top pointer
+    const targetAngle = 360 - (targetIndex * segAngle + segAngle / 2);
+    const finalRotation = currentRotation + fullSpins + ((targetAngle - (currentRotation % 360)) + 360) % 360;
+
+    currentRotation = finalRotation;
+    wheel.style.transform = `rotate(${finalRotation}deg)`;
+
+    setTimeout(() => {
+      const chosen = PHOTOS[targetIndex];
+      resultPhoto.innerHTML = '';
+
+      if (chosen.img) {
+        const imgEl = document.createElement('img');
+        imgEl.alt = `Foto ${targetIndex + 1}`;
+        imgEl.onerror = () => {
+          console.warn(
+            `[Your Secret Admirer] Não consegui carregar a imagem "${chosen.img}". ` +
+            `Confira: 1) se a pasta "fotos" existe ao lado do index.html, ` +
+            `2) se o arquivo tem exatamente esse nome e extensão (maiúsculas/minúsculas contam), ` +
+            `3) se está mesmo dentro da pasta "fotos" e não em outra pasta.`
+          );
+          resultPhoto.innerHTML = `<span class="placeholder-mark">📷</span>`;
+        };
+        imgEl.src = chosen.img;
+        resultPhoto.appendChild(imgEl);
+      } else {
+        resultPhoto.innerHTML = `<span class="placeholder-mark">📷</span>`;
+      }
+      resultCaption.textContent = `“${chosen.caption}”`;
+      resultIndex.textContent = `foto ${targetIndex + 1} de ${n}`;
+      resultBox.classList.add('show');
+      spinning = false;
+      spinBtn.disabled = false;
+    }, 4300);
+  });
+
+  // Faz a carta final surgir suavemente quando entra na tela
+  const closingInner = document.getElementById('closing-inner');
+  const closingObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        closingInner.classList.add('in-view');
+        closingObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+  closingObserver.observe(closingInner);
+</script>
+
+</body>
+</html>
